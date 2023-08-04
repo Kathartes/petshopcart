@@ -1,0 +1,113 @@
+body {
+    font-family: 'Krub', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0097A7;
+    color: #fff;
+    padding: 10px;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+   background-color: #DFE9F3;
+    
+}
+
+.product-list, .cart {
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+.cart-items  { 
+    display: grid;
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-gap: 10px;
+    max-height: 700px;
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    background-image: linear-gradient(to top, #DFE9F3 0%, white 100% );
+    padding: 2rem;
+    border-radius: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-gap: 50px;
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    background-image: linear-gradient(to top, #DFE9F3 0%, white 100% );
+
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.product-card, .cart-item {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    box-shadow: 0px 5px 15px 0px rgba(130,130,130,0.35);
+    
+}
+
+.product-card img, .cart-item img {
+    max-width: 150px;
+    height: auto;
+}
+
+#cart-items {
+    margin-bottom: 10px;
+}
+
+#checkout {
+    display: block;
+    width: 100%;
+    background-color: #FFC107;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+#checkout:hover {
+    background-color: #0097A7;
+    color: white;
+}
+
+.boton{
+    background-color: #0097A7;
+    color: white;
+    padding: 0.5rem 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-radius: .5rem;
+    width: 90%;
+    text-align: center;
+    border: none;
+}
+
+.boton:hover {
+   background-color: #FFC107; 
+   cursor: pointer;
+   color: black;
+}
