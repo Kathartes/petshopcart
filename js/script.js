@@ -4,43 +4,43 @@ const products = [
         id: 1,
         name: 'Connie chica',
         price: 250,
-        image: '../assets/image/connie.webp'
+        image: "../assets/image/connie.webp"
     },
     {
         id: 2,
         name: 'Connie mediano',
         price: 500,
-        image: '../assets/image/connie.webp'
+        image: 'assets/image/connie.webp'
     },
     {
         id: 3,
         name: 'Connie grande',
         price: 750,
-        image: '../assets/image/connie.webp'
+        image: "./assets/image/connie.webp"
     },
     {
         id: 4,
         name: 'Equilibrio chica',
         price: 500,
-        image: '../assets/image/equilibrio.webp'
+        image: "/assets/image/equilibrio.webp"
     },
     {
         id: 5,
         name: 'Equilibrio mediano',
         price: 1000,
-        image: '../assets/image/equilibrio.webp'
+        image: './assets/image/equilibrio.webp'
     },
     {
         id: 6,
         name: 'Equilibrio grande',
         price: 1500,
-        image: '../assets/image/equilibrio.webp'
+        image: '/assets/image/equilibrio.webp'
     },
     {
         id: 7,
         name: 'Hills chica',
         price: 1000,
-        image: '../assets/image/hills.jpg'
+        image: "assets/image/hills.jpg"
     },
     {
         id: 8,
