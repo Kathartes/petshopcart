@@ -1,16 +1,16 @@
-// Paso 3.1: Creamos un array de productos para simular una base de datos
+
 const products = [
     {
         id: 1,
         name: 'Connie chica',
         price: 250,
-        image: "../assets/image/connie.webp"
+        image: "./assets/image/connie.webp"
     },
     {
         id: 2,
         name: 'Connie mediano',
         price: 500,
-        image: 'assets/image/connie.webp'
+        image: './assets/image/connie.webp'
     },
     {
         id: 3,
@@ -22,7 +22,7 @@ const products = [
         id: 4,
         name: 'Equilibrio chica',
         price: 500,
-        image: "/assets/image/equilibrio.webp"
+        image: "./assets/image/equilibrio.webp"
     },
     {
         id: 5,
@@ -34,25 +34,25 @@ const products = [
         id: 6,
         name: 'Equilibrio grande',
         price: 1500,
-        image: '/assets/image/equilibrio.webp'
+        image: './assets/image/equilibrio.webp'
     },
     {
         id: 7,
         name: 'Hills chica',
         price: 1000,
-        image: "assets/image/hills.jpg"
+        image: "./assets/image/hills.jpg"
     },
     {
         id: 8,
         name: 'Hills mediano',
         price: 2000,
-        image: '../assets/image/hills.jpg'
+        image: './assets/image/hills.jpg'
     },
     {
         id: 9,
         name: 'Hills grande',
         price: 3000,
-        image: '../assets/image/hills.jpg'
+        image: './assets/image/hills.jpg'
     }
 ];
 
@@ -72,8 +72,8 @@ const totalContainer = document.getElementById('total');
 const purchaseMessage = document.getElementById('purchase-message');
 
 function addToCart(product) {
-    purchaseMessage.innerText = ''; // borrar mensaje si se hizo una compra
-    cartItems.push(product); // Agrega el producto al carrito
+    purchaseMessage.innerText = ''; 
+    cartItems.push(product); 
     updateLocalStorage();
     renderCartItems();
 }
@@ -103,7 +103,7 @@ function showProducts() {
 
 function removeProductFromCart(index) {
     if (index >= 0 && index < cartItems.length) {
-        cartItems.splice(index, 1); // Elimina el producto del carrito por su índice
+        cartItems.splice(index, 1); 
         updateLocalStorage();
         renderCartItems();
     }
@@ -154,7 +154,7 @@ checkoutBtn.addEventListener('click', () => {
     }else{
         purchaseMessage.innerText = 'El carrito esta vacio';
     }
-    cartItems = []; // Limpiamos el carrito después de la compra
+    cartItems = []; 
     updateLocalStorage();
     renderCartItems();
 });
