@@ -1,76 +1,16 @@
-
-const products = [
-    {
-        id: 1,
-        name: 'Connie chica',
-        price: 250,
-        image: "./assets/image/connie.webp"
-    },
-    {
-        id: 2,
-        name: 'Connie mediano',
-        price: 500,
-        image: './assets/image/connie.webp'
-    },
-    {
-        id: 3,
-        name: 'Connie grande',
-        price: 750,
-        image: "./assets/image/connie.webp"
-    },
-    {
-        id: 4,
-        name: 'Equilibrio chica',
-        price: 500,
-        image: "./assets/image/equilibrio.webp"
-    },
-    {
-        id: 5,
-        name: 'Equilibrio mediano',
-        price: 1000,
-        image: './assets/image/equilibrio.webp'
-    },
-    {
-        id: 6,
-        name: 'Equilibrio grande',
-        price: 1500,
-        image: './assets/image/equilibrio.webp'
-    },
-    {
-        id: 7,
-        name: 'Hills chica',
-        price: 1000,
-        image: "./assets/image/hills.jpg"
-    },
-    {
-        id: 8,
-        name: 'Hills mediano',
-        price: 2000,
-        image: './assets/image/hills.jpg'
-    },
-    {
-        id: 9,
-        name: 'Hills grande',
-        price: 3000,
-        image: './assets/image/hills.jpg'
-    }
-];
-
 let cartItems = []; // Carrito
-
 // LocalStorage
 function loadItems() {
-    if (localStorage.getItem('cartItems')) {
-        cartItems = JSON.parse(localStorage.getItem('cartItems'));
-        renderCartItems();
-    }
+    localStorage.getItem('cartItems')
+    ? (cartItems = JSON.parse(localStorage.getItem('cartItems')),renderCartItems())
+    :null;
 }
 const productList = document.getElementById('product-list');
 const cartItemsContainer = document.getElementById('cart-items');
 const checkoutBtn = document.getElementById('checkout');
 const totalContainer = document.getElementById('total');
 const purchaseMessage = document.getElementById('purchase-message');
-
+// agrega al carrito 
 function addToCart(product) {
     purchaseMessage.innerText = ''; 
     cartItems.push(product); 
@@ -79,42 +19,45 @@ function addToCart(product) {
 }
 // muestro las raciones que tengo en venta
 function showProducts() {
-    productList.innerHTML = '';
- 
-    products.forEach(product => {
-        const productCard = document.createElement('div');
-        productCard.classList.add('product-card');
-        productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>Precio: $${product.price}</p>
-            <button class="add-to-cart-btn boton" data-id="${product.id}">Agregar al Carrito</button>
-        `;
-        productList.appendChild(productCard);
+    fetch('../json/products.json')
+    .then(resp=> resp.json())
+    .then(products=>{
+        productList.innerHTML = '';
+        
+        products.forEach((post) => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="${post.image}" alt="${post.name}">
+                <h3>${post.name}</h3>
+                <p>Precio: $${post.price}</p>
+                <button class="add-to-cart-btn button" data-id="${post.id}">Agregar al Carrito</button>
+            `;
+            productList.appendChild(productCard);
 
-        const addToCartBtn = productCard.querySelector('.add-to-cart-btn');
-        addToCartBtn.addEventListener('click', () => {
-            const productId = parseInt(addToCartBtn.getAttribute('data-id'));
-            const selectedProduct = products.find(product => product.id === productId);
-            addToCart(selectedProduct);
+            const addToCartBtn = productCard.querySelector('.add-to-cart-btn');
+            addToCartBtn.addEventListener('click', () => {
+                const productId = parseInt(addToCartBtn.getAttribute('data-id'));
+                const selectedProduct = products.find(post => post.id === productId);
+                addToCart(selectedProduct);
+            });
         });
+    })
+    .catch(error => {
+        console.error('Error al obtener los datos:', error);
     });
 }
-
+//borra del carrito
 function removeProductFromCart(index) {
-    if (index >= 0 && index < cartItems.length) {
-        cartItems.splice(index, 1); 
-        updateLocalStorage();
-        renderCartItems();
-    }
+    index >= 0 && index < cartItems.length
+    ? (cartItems = [...cartItems.slice(0, index), ...cartItems.slice(index+1)], updateLocalStorage(), renderCartItems())
+    :null;
 }
-
+//recarga en el carrito lo que estaba 
 function updateLocalStorage() {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
 }
-
-
-
+//calcula el total
 function calculateTotal() {
     const total = cartItems.reduce((acc, product) => acc + product.price, 0);
     return total;
@@ -122,7 +65,6 @@ function calculateTotal() {
 //Mostramos en el carrito
 function renderCartItems() {
     cartItemsContainer.innerHTML = '';
-
     cartItems.forEach((product, index) => {
         const cartItem = document.createElement('div');
         cartItem.classList.add('cart-item');
@@ -130,7 +72,7 @@ function renderCartItems() {
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>Precio: $${product.price}</p>
-            <button class="remove-from-cart-btn boton" data-index="${index}">Eliminar</button>
+            <button class="remove-from-cart-btn button" data-index="${index}">Eliminar</button>
         `;
         cartItemsContainer.appendChild(cartItem);
 
@@ -139,21 +81,14 @@ function renderCartItems() {
             const index = parseInt(removeFromCartBtn.getAttribute('data-index'));
             removeProductFromCart(index);
         });
-
-     
     });
     const total = calculateTotal();
     totalContainer.innerText = `Total: $${total}`;
 }
-
-
 checkoutBtn.addEventListener('click', () => {
-
-     if (cartItems.length > 0) {
-        purchaseMessage.innerText = 'Compra realizada con éxito. Gracias por tu compra.';
-    }else{
-        purchaseMessage.innerText = 'El carrito esta vacio';
-    }
+        cartItems.length > 0
+        ? Swal.fire({icon: 'success', title: '¡Compra realizada con éxito!', text: 'Gracias por tu compra.', confirmButtonText: 'Cerrar'})
+        :  Swal.fire({icon: 'error', title: '¡El carrito esta vacio!', text: 'Seleccione articulos para comprar', confirmButtonText: 'Cerrar'});
     cartItems = []; 
     updateLocalStorage();
     renderCartItems();
