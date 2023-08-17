@@ -204,6 +204,9 @@ margin: 0;
     align-items: center;
     
 }
+.contacto {
+    margin-top: 5rem;
+}
 .formulario{
     background-color: var(--gris);
     width: min(60rem, 100% );
